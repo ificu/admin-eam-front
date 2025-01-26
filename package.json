@@ -1,0 +1,37 @@
+{
+  "name": "admin-lte",
+  "description": "Responsive open source admin dashboard and control panel.",
+  "version": "3.2.0",
+  "license": "MIT",
+  "author": "Colorlib <https://colorlib.com>",
+  "main": "dist/js/adminlte.min.js",
+  "scripts": {
+    "dev": "npm-run-all --parallel sync",
+    "plugins": "node build/npm/Publish.js -v",
+    "sync": "browser-sync start --server --files *.html pages/ dist/"
+  },
+  "keywords": [
+    "css",
+    "sass",
+    "responsive",
+    "admin",
+    "template",
+    "theme",
+    "framework",
+    "control-panel",
+    "dashboard"
+  ],
+  "homepage": "https://adminlte.io",
+  "style": "dist/css/adminlte.css",
+  "sass": "build/scss/adminlte.scss",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@ttskch/select2-bootstrap4-theme": "^1.5.2",
+    "bootstrap": "^5.3.3",
+    "browser-sync": "^3.0.3",
+    "chart.js": "^2.9.4",
+    "fs-extra": "^10.0.0",
+    "jquery": "^3.6.0",
+    "select2": "^4.0.13"
+  }
+}
