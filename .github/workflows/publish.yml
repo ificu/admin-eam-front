@@ -27,7 +27,7 @@ jobs:
       
   package:
     name: Package and Publish
-    if: ${{ githbu.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
     needs: [ build ]
     runs-on: ubuntu-latest
     permissions:
