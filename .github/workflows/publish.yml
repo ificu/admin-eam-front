@@ -45,8 +45,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ env.REGISTRY}}/${{ github.IMAGE_NAME }}:${{ env.VERSION }}  
-            ${{ env.REGISTRY}}/${{ github.IMAGE_NAME }}:${{ env.TAG_DATE }}          
+            ${{ env.REGISTRY}}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}  
+            ${{ env.REGISTRY}}/${{ env.IMAGE_NAME }}:${{ env.TAG_DATE }}          
 
 
     
