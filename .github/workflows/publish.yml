@@ -6,7 +6,7 @@ env:
   IMAGE_NAME: ificu/admin-eam-front
   VERSION: latest
   ID: ificu
-  PAT: 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
+  PAT: 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
 
 jobs:
   build:
