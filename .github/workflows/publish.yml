@@ -1,6 +1,13 @@
 name: Commit Stage
 on: push
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ificu/admin-eam-front
+  VERSION: latest
+  ID: ificu
+  PAT: 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
+
 jobs:
   build:
     name: Build and Test
@@ -11,8 +18,43 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
-      - name : Set up Node
+      - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm ci
+      - name: Valid Check
+        run: npm ci
+      
+  package:
+    name: Package and Publish
+    if: ${{ githbu.ref == 'refs/heads/main' }}
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+      - name: Get current date
+        run: echo "TAG_DATE=$(date +'%Y%m%d')" >> $GITHUB_ENV
+      - name: Build contailner image
+        run: docker 
+      - name: Docker Login
+        uses: docker/login-action@v3.3.0
+        with:
+          registry: ${{ env.REGISTRY}}
+          username: ${{ env.ID}}
+          password: ${{ env.PAT}}
+      - name: Build and push Docker image with date tag
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.REGISTRY}}/${{ github.IMAGE_NAME }}:${{ env.VERSION }}  
+            ${{ env.REGISTRY}}/${{ github.IMAGE_NAME }}:${{ env.TAG_DATE }}          
+
+
+    
